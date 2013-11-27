@@ -18,10 +18,14 @@
         <p><a href='/radio'>Radio</a></p>
         <p><a href='/this_carleton_life'>Podcast</a></p>
         <p><a href='/blog'>Blog</a></p>
-        <p><a href='/about'>About</a></p>
+        <p><a href='/about'>About</p>
       </div>
 
       <div class='box'>
+
+        <% @posts.each do |post| %>
+          <p><a href="/blog/<%= post %>"><%= post %></a></p>
+        <% end %>
 
         <%= yield %>
 
