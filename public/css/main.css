@@ -15,7 +15,8 @@ h1 {
 }
 
 .h1_blog {
-  font-size: 15pt;
+  font-size: 20pt;
+  letter-spacing: 3px;
 }
 
 h2 {
@@ -123,3 +124,41 @@ a:hover {
   width: 16px;
   margin-right: 10px;
 }
+
+ul {
+  list-style: none;
+}
+
+.blog img {
+  width: 300px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/*
+ul.dropdown {
+  display: none;
+  width: 150px;
+  margin: 0;
+  padding: 0;
+  position: relative;
+  top: -29px;
+  left: 75px;
+  background-color: #eee;
+  color: black;
+}
+
+p:hover ul.dropdown {
+  display: inline-block;
+}
+
+ul.dropdown li {
+  display: block;
+  padding: 5px;
+}
+
+ul.dropdown li:hover {
+  background-color: gray;
+  color: #fff;
+}*/
