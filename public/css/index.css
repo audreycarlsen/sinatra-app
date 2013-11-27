@@ -1,0 +1,47 @@
+body {
+  margin: 0;
+  font-family: Avenir, sans-serif;
+}
+
+a {
+  text-decoration: none;
+  color:#000000;
+}
+
+a:hover {
+  color: #c20029;
+  transition: color .25s ease-in-out;
+   -moz-transition: color .25s ease-in-out;
+   -webkit-transition: color .25s ease-in-out;
+}
+
+#title {
+  width: 800px;
+  height: 150px;
+
+  position: absolute;
+  top: 40%;
+  left: 0;
+  right: 0;
+  
+  margin: auto;
+  margin-top: -45px;
+}
+
+h1, h2 {
+  font-weight: normal;
+  text-align: center;
+  padding: 0;
+  margin: 0;
+}
+
+h1 {
+  font-size: 60pt;
+  letter-spacing: 10px;
+}
+
+h2 {
+  font-size: 15pt;
+  letter-spacing: 8px;
+  line-height: 3;
+}

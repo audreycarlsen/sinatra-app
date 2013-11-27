@@ -17,10 +17,6 @@ class MyApp < Sinatra::Base
     erb :this_carleton_life
   end
 
-  get '/contact' do
-    erb :contact
-  end
-
   get '/about' do
     erb :about
   end

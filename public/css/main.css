@@ -1,30 +1,12 @@
-h1, h2, h3, h4 {
-  padding: 0;
-  line-height: 1;
-  margin: 0;
-}
-
 body {
   margin: 0;
   font-family: Avenir, sans-serif;
 }
 
-#title {
-  width: 800px;
-  height: 150px;
-
-  position: absolute;
-  top: 40%;
-  left: 0;
-  right: 0;
-  
-  margin: auto;
-  margin-top: -45px;
-}
-
-h1, h2 {
-  font-weight: normal;
-  text-align: center;
+h1, h2, h3 {
+  padding: 0;
+  line-height: 1;
+  margin: 0;
 }
 
 h1 {
@@ -34,82 +16,110 @@ h1 {
 
 h2 {
   font-size: 15pt;
-  letter-spacing: 8px;
-  line-height: 3;
-}
-
-h3 {
-  font-size: 17pt;
   letter-spacing: 1px;
 }
 
-h4 {
+h3 {
   font-size: 12pt;
 }
 
 a {
   text-decoration: none;
   color:#000000;
+
 }
 
 a:hover {
-  color: #a01846;
+  color: #c20029;
+  transition: color .25s ease-in-out;
+   -moz-transition: color .25s ease-in-out;
+   -webkit-transition: color .25s ease-in-out;
 }
 
 #header {
-/*  border: 1px solid red;*/
   font-size: 30pt;
   letter-spacing: 4px;
   padding-top: 40px;
   padding-left: 40px;
-  padding-bottom: 8px;
-  width: 500px;
+  padding-bottom: 26px;
+  width: 850px;
+  position: fixed;
+  top: 0;
+  background-color: white;
+  z-index:1;
 }
 
 .container {
-/*    border: 1px solid red;*/
-  width: 900px;
+  width: 870px;
 }
 
 #sidebar {
-/*  border: 1px solid red;*/
   font-size: 17px;
   padding-left: 65px;
   width: 100px;
+  height: 100%;
   letter-spacing: 1px;
-  display: inline-block;
-  float: left;
+  position: fixed;  
+  top: 105px;
+  background-color: white;
+}
+
+#sidebar a:hover {
+
 }
 
 .box {
-/*  border: 1px solid red;*/
   font-family: Avenir;
-  padding-top: 15px;
-  padding-left: 60px;
-  display: inline-block;
-  width: 650px;
+  margin-left: 185px;
+  margin-top: 124px;
+  width: 662px;
+  margin-bottom: 80px;
 }
 
 .article {
-  display: block;
   margin-bottom: 30px;
   margin-left: 10px;
 }
 
 .article img {
   width: 200px;
+  transition: opacity .25s ease-in-out;
+   -moz-transition: opacity .25s ease-in-out;
+   -webkit-transition: opacity .25s ease-in-out;
+}
+
+.article img:hover {
+  opacity: 0.75;
 }
 
 .description {
-/*  border: 1px solid red;*/
   font-size: 10pt;
   padding-top: 10px;
   padding-left: 15px;
   display: inline-block; 
-  width: 400px;
+  width: 430px;
   vertical-align: top;
 }
 
 #sperm {
   padding-top: 0;
+}
+
+#about_me a {
+  color: #c20029;
+}
+
+#about_me a:hover {
+  color: #828282;
+}
+
+.social_media {
+  position: fixed;
+  bottom: 20px;
+  left: 40px;
+}
+
+.social_media img {
+  width: 16px;
+  margin-right: 10px;
 }
