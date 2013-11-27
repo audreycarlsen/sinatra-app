@@ -14,6 +14,10 @@ h1 {
   letter-spacing: 10px;
 }
 
+.h1_blog {
+  font-size: 15pt;
+}
+
 h2 {
   font-size: 15pt;
   letter-spacing: 1px;
@@ -26,7 +30,6 @@ h3 {
 a {
   text-decoration: none;
   color:#000000;
-
 }
 
 a:hover {
@@ -64,14 +67,10 @@ a:hover {
   background-color: white;
 }
 
-#sidebar a:hover {
-
-}
-
 .box {
   font-family: Avenir;
   margin-left: 185px;
-  margin-top: 124px;
+  margin-top: 122px;
   width: 662px;
   margin-bottom: 80px;
 }
@@ -105,18 +104,19 @@ a:hover {
   padding-top: 0;
 }
 
-#about_me a {
+.about_me a {
   color: #c20029;
 }
 
-#about_me a:hover {
+.about_me a:hover {
   color: #828282;
 }
 
 .social_media {
   position: fixed;
-  bottom: 20px;
+  bottom: 16px;
   left: 40px;
+  z-index:2;
 }
 
 .social_media img {

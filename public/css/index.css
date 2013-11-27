@@ -28,19 +28,19 @@ a:hover {
   margin-top: -45px;
 }
 
-h1, h2 {
+#index_h1, #index_h2 {
   font-weight: normal;
   text-align: center;
   padding: 0;
   margin: 0;
 }
 
-h1 {
+#index_h1 {
   font-size: 60pt;
   letter-spacing: 10px;
 }
 
-h2 {
+#index_h2 {
   font-size: 15pt;
   letter-spacing: 8px;
   line-height: 3;
