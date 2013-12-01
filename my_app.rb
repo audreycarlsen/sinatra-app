@@ -7,6 +7,7 @@ class MyApp < Sinatra::Base
     @posts = Dir.glob('views/posts/*.erb').map do |post_name|
       post_name.split('/').last.slice(0..-5)
     end
+    @sorted_posts = meta_data.sort_by { |post, date_hash| date_hash["date"] }.reverse
   end
 
   get '/' do
@@ -21,16 +22,12 @@ class MyApp < Sinatra::Base
     erb :radio
   end
 
-  get '/this_carleton_life' do
-    erb :this_carleton_life
-  end
-
   get '/blog' do
-    erb :blog, :layout => :blog_layout
+    erb :blog
+    #, layout: :blog_layout
   end
 
   get '/blog/:post_name' do
-    erb "/posts/#{params[:post_name]}".to_sym, :layout => :blog_layout
     page = erb("/posts/#{params[:post_name]}".to_sym, layout: false)
     page_body = page.split("\n\n", 2).last
     erb page_body
@@ -55,5 +52,3 @@ class MyApp < Sinatra::Base
   end
 
 end
-
-# Fix headers, dropdown menu, accessibility organization.

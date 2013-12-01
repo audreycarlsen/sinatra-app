@@ -38,10 +38,52 @@ a:hover {
 #index_h1 {
   font-size: 60pt;
   letter-spacing: 10px;
+  text-align: center;
 }
 
 #index_h2 {
   font-size: 15pt;
   letter-spacing: 8px;
-  line-height: 3;
+  line-height: 1px;
+  text-align: left;
+  margin-left: 3%;
+}
+
+li {
+  list-style: none;
+  display: inline;
+}
+
+ul.dropdown {
+  display: none;
+  font-size: 15px;
+  width: 200px;
+  height: 100px;
+  position: absolute;
+  top: 143px;
+  left: 400px;
+  background-color: white;
+  text-align: center;
+  letter-spacing: 1px;
+}
+
+ul li:hover ul.dropdown {
+  display: inline-block;
+}
+
+ul.dropdown li {
+  display: block;
+  padding: 10px;
+}
+
+.social_media {
+  position: fixed;
+  bottom: 16px;
+  left: 40px;
+  z-index:2;
+}
+
+.social_media img {
+  width: 16px;
+  margin-right: 10px;
 }

@@ -10,7 +10,29 @@
   <body>
     <div id='title'>
       <h1 id='index_h1'>Aüdrey Carlšen</h1>
-      <h2 id='index_h2'><a href='/print' class='fade'>Priñt</a>  ~  <a href='/radio' class='fade'>Radiö </a>  ~  <a href='/this_carleton_life' target='_blank' class='fade'>Podcåst</a> ~ <a href='/blog' class='fade'>Bløg</a> ~ <a href='/about' class='fade'>Aboüt</a></h2>
+      <h2 id='index_h2'>
+        <ul>
+          <li><a href='/print'>Priñt</a>  ~  </li>
+          <li><a href='/radio'>Radiö </a>  ~  </li>
+          <li><a href='http://thiscarletonlife.blogspot.com' target='_blank'>Podcåst</a> ~ </li>
+          <li>Bløg
+            <ul class='dropdown'>
+              <li>
+                <% @sorted_posts.each do |post, date_array| %>
+                  <li><a href="/blog/<%= post %>"><em><%= post %></em></a></li><br><br>
+                <% end %>
+              </li><br>
+            </ul>
+          </li>
+          <li>~ <a href='/about'>Aboüt</a></li>
+        </ul>
+      </h2>
+    </div>
+
+    <div class='social_media'>
+      <a href='http://www.linkedin.com/pub/audrey-carlsen/63/294/96b' target='_blank'><img src='../images/linkedin.svg' title='LinkedIn'></a>
+      <a href='https://twitter.com/audcarls' target='_blank'><img src='../images/twitter.svg' title='Twitter'></a>
+      <a href='https://github.com/audreycarlsen' target='_blank'><img src='../images/github.svg' title='GitHub'></a>
     </div>
   </body>
 

@@ -14,18 +14,22 @@
 
     <div class='container'>
       <div id='sidebar'>
-      
-        <p><a href='/print'>Print</a></p>
-        <p><a href='/radio'>Radio</a></p>
-        <p><a href='/this_carleton_life'>Podcast</a></p>
-        <p><a href='/blog'>Blog</a></p>
-        <p><a href='/about'>About</a>
-          <ul class='dropdown'>
-            <li>Blog</li>
-            <li>Resume</li>
-          </ul>
-        </p>
-        
+        <ul>
+          <li><a href='/print'>Print</a></li><br>
+          <li><a href='/radio'>Radio</a></li><br>
+          <li><a href='http://thiscarletonlife.blogspot.com' target='blank'>Podcast</a></li><br>
+          <li>
+            Blog
+            <ul class='dropdown'>
+              <li>
+                <% @sorted_posts.each do |post, date_array| %>
+                <li><a href="/blog/<%= post %>"><%= post %></a></li>
+                <% end %>
+              </li><br>
+            </ul>
+          </li><br>
+          <li><a href='/about'>About</a></li>
+        </ul>
       </div>
 
       <div class='box'>

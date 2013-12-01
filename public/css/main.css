@@ -3,6 +3,18 @@ body {
   font-family: Avenir, sans-serif;
 }
 
+a {
+  text-decoration: none;
+  color:#000000;
+}
+
+a:hover {
+  color: #c20029;
+  transition: color .25s ease-in-out;
+   -moz-transition: color .25s ease-in-out;
+   -webkit-transition: color .25s ease-in-out;
+}
+
 h1, h2, h3 {
   padding: 0;
   line-height: 1;
@@ -24,20 +36,18 @@ h2 {
   letter-spacing: 1px;
 }
 
+.h2_blog {
+  font-size: 10pt;
+  letter-spacing: 1px;
+}
+
 h3 {
   font-size: 12pt;
 }
 
-a {
-  text-decoration: none;
-  color:#000000;
-}
-
-a:hover {
-  color: #c20029;
-  transition: color .25s ease-in-out;
-   -moz-transition: color .25s ease-in-out;
-   -webkit-transition: color .25s ease-in-out;
+.h3_podcast {
+  font-size: 15pt;
+  letter-spacing: 1px;
 }
 
 #header {
@@ -59,7 +69,7 @@ a:hover {
 
 #sidebar {
   font-size: 17px;
-  padding-left: 65px;
+  padding-left: 30px;
   width: 100px;
   height: 100%;
   letter-spacing: 1px;
@@ -71,7 +81,7 @@ a:hover {
 .box {
   font-family: Avenir;
   margin-left: 185px;
-  margin-top: 122px;
+  margin-top: 125px;
   width: 662px;
   margin-bottom: 80px;
 }
@@ -105,12 +115,47 @@ a:hover {
   padding-top: 0;
 }
 
-.about_me a {
+.reverse_links a {
   color: #c20029;
 }
 
-.about_me a:hover {
+.reverse_links a:hover {
   color: #828282;
+}
+
+.blog img {
+  width: 300px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.acts {
+  font-size: 10pt;
+}
+
+ul {
+  list-style: none;
+}
+
+ul.dropdown {
+  display: none;
+  font-size: 15px;
+  position: absolute;
+  width: 150px;
+  top: 148px;
+  left: 150px;
+  background-color: white;
+  border: 2px solid black;
+}
+
+ul li:hover ul.dropdown {
+  display: inline-block;
+}
+
+ul.dropdown li {
+  display: block;
+  padding: 5px;
 }
 
 .social_media {
@@ -124,41 +169,3 @@ a:hover {
   width: 16px;
   margin-right: 10px;
 }
-
-ul {
-  list-style: none;
-}
-
-.blog img {
-  width: 300px;
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-/*
-ul.dropdown {
-  display: none;
-  width: 150px;
-  margin: 0;
-  padding: 0;
-  position: relative;
-  top: -29px;
-  left: 75px;
-  background-color: #eee;
-  color: black;
-}
-
-p:hover ul.dropdown {
-  display: inline-block;
-}
-
-ul.dropdown li {
-  display: block;
-  padding: 5px;
-}
-
-ul.dropdown li:hover {
-  background-color: gray;
-  color: #fff;
-}*/
