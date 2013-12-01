@@ -90,3 +90,10 @@ ul.dropdown li {
   width: 16px;
   margin-right: 10px;
 }
+
+.social_media img:hover {
+  opacity: .5;
+  transition: opacity .25s ease-in-out;
+   -moz-transition: opacity .25s ease-in-out;
+   -webkit-transition: opacity .25s ease-in-out;
+}

@@ -24,7 +24,6 @@ class MyApp < Sinatra::Base
 
   get '/blog' do
     erb :blog
-    #, layout: :blog_layout
   end
 
   get '/blog/:post_name' do
@@ -50,5 +49,4 @@ class MyApp < Sinatra::Base
   get '/about' do
     erb :about
   end
-
 end

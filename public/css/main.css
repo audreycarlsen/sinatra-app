@@ -136,7 +136,7 @@ ul.dropdown {
   top: 148px;
   left: 150px;
   background-color: white;
-  border: 2px solid black;
+  border: 1px solid black;
   padding-left: 25px;
   transition: opacity .25s ease-in-out;
    -moz-transition: opacity .25s ease-in-out;
@@ -162,4 +162,11 @@ ul.dropdown li {
 .social_media img {
   width: 16px;
   margin-right: 10px;
+}
+
+.social_media img:hover {
+  opacity: .5;
+  transition: opacity .25s ease-in-out;
+   -moz-transition: opacity .25s ease-in-out;
+   -webkit-transition: opacity .25s ease-in-out;
 }
