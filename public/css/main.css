@@ -123,34 +123,28 @@ h3 {
   color: #828282;
 }
 
-.blog img {
-  width: 300px;
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.acts {
-  font-size: 10pt;
-}
-
 ul {
   list-style: none;
 }
 
 ul.dropdown {
-  display: none;
+  opacity: 0;
   font-size: 15px;
+  font-style: italic;
   position: absolute;
-  width: 150px;
+  width: 130px;
   top: 148px;
   left: 150px;
   background-color: white;
   border: 2px solid black;
+  padding-left: 25px;
+  transition: opacity .25s ease-in-out;
+   -moz-transition: opacity .25s ease-in-out;
+   -webkit-transition: opacity .25s ease-in-out;
 }
 
 ul li:hover ul.dropdown {
-  display: inline-block;
+  opacity: 1;
 }
 
 ul.dropdown li {

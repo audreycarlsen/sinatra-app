@@ -55,7 +55,7 @@ li {
 }
 
 ul.dropdown {
-  display: none;
+  opacity: 0;
   font-size: 15px;
   width: 200px;
   height: 100px;
@@ -65,10 +65,13 @@ ul.dropdown {
   background-color: white;
   text-align: center;
   letter-spacing: 1px;
+  transition: opacity .25s ease-in-out;
+   -moz-transition: opacity .25s ease-in-out;
+   -webkit-transition: opacity .25s ease-in-out;
 }
 
 ul li:hover ul.dropdown {
-  display: inline-block;
+  opacity: 1;
 }
 
 ul.dropdown li {
