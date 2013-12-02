@@ -11,7 +11,7 @@ class MyApp < Sinatra::Base
   end
 
   get '/' do
-    erb :index, :layout => false
+    erb :index, layout: false
   end
 
   get '/print' do
@@ -20,10 +20,6 @@ class MyApp < Sinatra::Base
 
   get '/radio' do
     erb :radio
-  end
-
-  get '/blog' do
-    erb :blog
   end
 
   get '/blog/:post_name' do
