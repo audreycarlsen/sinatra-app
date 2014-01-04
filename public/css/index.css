@@ -97,7 +97,3 @@ ul.dropdown li {
    -moz-transition: opacity .25s ease-in-out;
    -webkit-transition: opacity .25s ease-in-out;
 }
-
-.code {
-  text-indent:50px;
-}
