@@ -16,17 +16,17 @@ date: 2014-1-3
 
 <p>Here's what I included in my User model:</p>
 
-<p>
+<div class='code'>
   has_many :friendships<br>
   has_many :friends, :through => :friendships
-</p>
+</div>
 
 <p>And in my Friendship join table:</p>
 
-<p> 
+<div class='code'> 
   belongs_to :user<br>
   belongs_to :friend, :class_name => 'User'
-</p>
+</div>
 
 <p>The key bit of code to pay attention to is that last line in the Frienship model. We want a user to be able to have many friends, but in reality, those "friends" are really just other users. So we need to tell Rails that whenever we talk about "friends", we're really just talking about other instances of the User class.</p>
 
