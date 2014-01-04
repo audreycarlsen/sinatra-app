@@ -1,0 +1,33 @@
+date: 2014-1-3
+
+<div class='reverse_links'>
+<h2 class='h2_blog'>Friday, January 3, 2014</h2><br>
+<h1 class='h1_blog'>Week Eight</h1>
+
+<p>We've been given a two week break from coding for the holidays, and in that time, in between spending time with family, and traveling to Eastern Washington, Oregon, and Idaho, I've found time to work on an individuals Rails project - the first app that I've coded entirely on my own.</p>
+
+<p>Our instructors gave us several ideas for our projects, but I decided to take on a different challenge and design a rip-off Facebook app. I'm keeping it simple - no picture tagging or private messaging, just the basics, including being able to friend other users, accept pending friend requests, post things to your own and other people's walls, and view a simple newsfeed.</p>
+
+<p>Naturally, it made sense to start working on how to enable users to create accounts and sign into those accounts. This was fairly simple, and really the only new thing I had to learn was how to authenticate passwords. Turns out there's actually a really simple - and totally magical - way to do this. There's a gem called "bcrypt" that allows for really easy password authentication. Once you've added the gem to your Gemfile, all that you need to do is include "has_secure_password" in your User model (in the same place you'd put other specifications like "has_many" or "validates") and add a "password_digest" column to the User table in your database. Et voila!</p>
+
+<p>The next step after creating user accounts was the enable users to friend eachother. This requires having a relationship between users, called "friendships". In the past, I'd learned how to link distinct objects to each other - such as an ingredient to a recipe - but how do you link one user to another?</p>
+
+<p>As it turns out, this is pretty simple as well, and follows the same logic as is required for linking any other two objects together, with just a little bit more code.</p>
+
+<p>Here's what I included in my User model:</p>
+
+<p>
+  has_many :friendships<br>
+  has_many :friends, :through => :friendships
+</p>
+
+<p>And in my Friendship join table:</p>
+
+<p> 
+  belongs_to :user<br>
+  belongs_to :friend, :class_name => 'User'
+</p>
+
+<p>The key bit of code to pay attention to is that last line in the Frienship model. We want a user to be able to have many friends, but in reality, those "friends" are really just other users. So we need to tell Rails that whenever we talk about "friends", we're really just talking about other instances of the User class.</p>
+
+<p>This is called a self-referential association - <a href='http://railscasts.com/episodes/163-self-referential-association'>Ryan Bates</a> has a great screencast on it for anyone who's interested in learning more.</p>
