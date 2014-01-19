@@ -1,0 +1,32 @@
+date: 2014-1-19
+
+<div class='reverse_links'>
+<h2 class='h2_blog'>Sunday, January 19, 2014</h2><br>
+<h1 class='h1_blog'>Week Ten</h1>
+
+<p>Last week I worked on using a JavaScript tool called Canvas to create a dynamic <a href-"http://slothbook.herokuapp.com/dashboard" target='_blank'>analytics page</a> with visuals (think Google Analytics... but BETTER) for one of my previous web apps.</p>
+
+<p>For analytics, it's important to keep track of unique visitors to the site, both because that's an interesting statistic in and of itself, but also because it allows for further analysis of what web browsers are used by different users, what percentage of users are new versus returning, etc.</p>
+
+<p>For my analytics dashboard, I created a Visitor model. Every time a new visitor comes to my site, ActiveRecord creates a new row in my database with all of that visitor's information (IP address, web browser, mobile vs. non-mobile). I also keep track of how many times a specific visitor has been to my site with a "total visits" column that increments by one each time a visitor accesses my website from an external source.</p>
+
+<p>At first, I decided to identify each visitor based on their IP address. So the logic for my code went something like this: if there is a visitor already in my database with the same IP address as the current visitor, set that previous visitor to be the current visitor, and increase their visit count by one. If no matching IP address is found in the database, create a new row for this new visitor.</p>
+
+<p>The code for this worked just fine, but the problem was that IP addresses are not actually very good indicators of unique visitors. Every computer in our classroom shares the same IP address, meaning that even if all fourteen of my peers visited my website, it would only be taken down as one visitor.</p>
+
+<p>My solution was to use cookies instead of IP address as the identifying information. Cookies are still a little bit magical to me, but it turns out they're actually pretty simple to use. You can think of cookies as a hash, just like params or session, that stores information. I set a unique cookie ID for each visitor in the same way that you'd add any other key-value pair into a hash:</p>
+
+<div class='code'>
+  <p>cookies.permanent[:visitor_id] = rand(1000000000000000000).to_s</p>
+</div>
+
+<p>So every visitor has a (hopefully) unique number corresponding to "visitor ID" stored in their cookies. More specifically, it's stored in a permanent cookies sub-hash that won't get cleared once the browser is closed. (Note that I turn this number into a string to avoid confusion between FixNum, if the random number is small enough, versus BigNum, if the number is large.) Then I stored this number string in a column in my Visitor table called "cookie ID": </p>
+
+<div class='code'>
+  <p>Visitor.create(cookie_id: cookies.permanent[:visitor_id])
+</p>
+</div>
+
+<p>In this way, I can now use this cookie ID that I created to identify each visitor, in lieu of IP address.</p>
+
+<p>One thing to note is that cookies are browser-specific, meaning that if the same user visits the website on the same computer, but using a different browser, the cookies won't be saved, so my application won't be able to identify that user as a returning visitor. However, analytics are never perfect, and are used to gain information about bigger trends (how likely is it that someone consistently switches between browsers or clears their cookies?), so I'm not too worried.</p>
