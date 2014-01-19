@@ -14,7 +14,11 @@ date: 2014-1-19
 
 <p>The code for this worked just fine, but the problem was that IP addresses are not actually very good indicators of unique visitors. Every computer in our classroom shares the same IP address, meaning that even if all fourteen of my peers visited my website, it would only be taken down as one visitor.</p>
 
-<p>My solution was to use cookies instead of IP address as the identifying information. Cookies are still a little bit magical to me, but it turns out they're actually pretty simple to use. You can think of cookies as a hash, just like params or session, that stores information. I set a unique cookie ID for each visitor in the same way that you'd add any other key-value pair into a hash:</p>
+<p>My solution was...</p>
+
+<img src="http://voices.suntimes.com/wp-content/uploads/2013/08/Cookiemonster2_FB.jpg" width="250"></img>
+
+<p>...cookies. More specifically, I decided to use a unique ID stored in the users cookies instead of their IP address as the identifying information. mCookies are still a little bit magical to me, but it turns out they're actually pretty simple to use. You can think of cookies as a hash, just like params or session, that stores information. I set a unique cookie ID for each visitor in the same way that you'd add any other key-value pair into a hash:</p>
 
 <div class='code'>
   <p>cookies.permanent[:visitor_id] = rand(1000000000000000000).to_s</p>
