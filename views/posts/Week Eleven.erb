@@ -1,0 +1,32 @@
+date: 2014-1-26
+
+<div class='reverse_links'>
+<h2 class='h2_blog'>Sunday, January 26, 2014</h2><br>
+<h1 class='h1_blog'>Week Eleven</h1>
+
+<p>Here's a predicament: What do you do when your code contains sensitive information that you don't want published on GitHub for the world to see? For example, to use a gem like <a href="https://github.com/intridea/omniauth" target="_blank">OmniAuth</a>, providers like Twitter and Tumblr require that you use secret "tokens" or ID numbers, long strings of random letters and numbers, that they provide to verify that your app is trustworthy. It'd be nice to be able to push your code to GitHub, but you definitely don't want those secret tokens to be public.</p>
+
+<p>Luckily there's a gem called <a href="https://github.com/laserlemon/figaro" target="_blank">Figaro</a> that provides a relatively simple fix for masking sensitive information on GitHub.</p>
+
+<p>First, add the gem to your Gemfile:.</p>
+
+<div class='code'>
+  <p>gem 'figaro'</p>
+</div>
+
+<p>Then run <span class="code">bundle</span>. In order to install Figaro, an additional step is necessary:</p>
+
+<div class='code'>
+  <p>rails generate figaro:install</p>
+</div>
+
+<p>This will create a file called application.yml in the config folder of your Rails app. This is where you should store anything that you don't want to be seen on GitHub as an environment variable. For example, in my app, I need to store several secret tokens provided by Twitter, so this is what I would put in my YAML file:</p>
+
+<div class='code'>
+  TWITTER_CONSUMER_KEY: "4ZAXXXXXXX"<br>
+  TWITTER_CONSUMER_SECRET: "B2pXXXXXXX"<br>
+  TWITTER_ACCESS_TOKEN: "230XXXXXXX"<br>
+  TWITTER_ACCESS_TOKEN_SECRET: "gmDXXXXXXX"
+</div>
+
+<p>And then all you need to do is use these environment variable names in the place of the actual text strings in the rest of your code. The application.yml file is automatically added to .gitignore, so that file, the only place that contains your actual secret keys, won't ever be pushed to GitHub. The only things that other GitHub users will be able to see are your environment variable placeholders.</p>
