@@ -2,7 +2,7 @@ date: 2014-1-3
 
 <div class='reverse_links'>
 <h2 class='h2_blog'>Friday, January 3, 2014</h2><br>
-<h1 class='h1_blog'>Week Eight</h1>
+<h1 class='h1_blog'>With a Little Help from My Friends</h1>
 
 <p>We've been given a two week break from coding for the holidays, and in that time, in between spending time with family, and traveling to Eastern Washington, Oregon, and Idaho, I've found time to work on an individuals Rails project - the first app that I've coded entirely on my own.</p>
 
@@ -28,6 +28,6 @@ date: 2014-1-3
   <p>belongs_to :friend, :class_name => 'User'</p>
 </div>
 
-<p>The key bit of code to pay attention to is that last line in the Frienship model. We want a user to be able to have many friends, but in reality, those "friends" are really just other users. So we need to tell Rails that whenever we talk about "friends", we're really just talking about other instances of the User class.</p>
+<p>The key bit of code to pay attention to is that last line in the Friendship model. We want a user to be able to have many friends, but in reality, those "friends" are really just other users. So we need to tell Rails that whenever we talk about "friends", we're really just talking about other instances of the User class.</p>
 
 <p>This is called a self-referential association - <a href='http://railscasts.com/episodes/163-self-referential-association'>Ryan Bates</a> has a great screencast on it for anyone who's interested in learning more.</p>
