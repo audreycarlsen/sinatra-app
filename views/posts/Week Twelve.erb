@@ -15,7 +15,7 @@ date: 2014-2-03
 
 <p>The Twitter gem provides a really slick method that makes it easy for anyone who has logged into our app using their Twitter account to favorite tweets. All you need is a "client" that has the correct credentials to post to Twitter, and a specific tweet that you want favorited. You can create the client using the <span class='code'>Twitter::REST::Client.new</span> method and the access tokens provided by Twitter for that specific user (creating this client is outside of the scope of this blog post).</p>
 
-<p>In our Post database, we stored information about tweets from people that our users are following on Twitter, including the specific "tweet ID" assigned by Twitter. This makes it easy to "grab" that tweet object using the .status method provided by the Twitter gem:
+<p>In our Post database, we stored information about tweets from people that our users are following on Twitter, including the specific "tweet ID" assigned by Twitter. This makes it easy to grab that tweet object using the <span class='code'>.status</span> method provided by the Twitter gem:
 
 <div class='code'>
   <p><strong>In posts_controller.rb:</strong></p>
@@ -29,11 +29,11 @@ date: 2014-2-03
   <p>redirect_to :back, notice: "Tweet has been favorited!"</p>
 </div>
 
-<p>The .favorite method adds the tweet object that is passed in as a argument to that client's favorites on Twitter. Using .favorite! (with the bang), will go further by throwing an error if the client has already favorited that tweet.</p>
+<p>The <span class='code'>.favorite</span> method adds the tweet object that is passed in as an argument to that client's favorites on Twitter. Using <span class='code'>.favorite!</span> (with the bang), will go further by throwing an error if the client has already favorited that tweet.</p>
 
-<p>This is a convenient feature, but it also means that it's possible to encounter an error page on our app - not very user friendly. We want to handle that error gracefully. And this is where  <span class='code'>rescue</span> comes to the... well, rescue.</p>
+<p>This is a convenient feature, but it also means that it's possible to encounter an error page on our app -- not very user-friendly. We want to handle that error gracefully, and this is where a nifty little method called <span class='code'>rescue</span> comes to the... well, rescue.</p>
 
-<p>"Rescue" can be used whenever you want to work around something that you know might throw an error (i.e. trying to favorite a tweet that has already been favorited). Basically, it tells the app to ignore the error, not freak, and do something else instead. Here's how I used <span class='code'>rescue</span> to work around the error that .favorite! throws:</p>
+<p><span class='code'>Rescue</span> can be used whenever you want to work around something that you know might throw an error (i.e. trying to favorite a tweet that has already been favorited). Basically, it tells the app to ignore the error, not freak, and do something else instead. Here's how I used <span class='code'>rescue</span> to work around the error that .favorite! throws:</p>
 
 <div class='code'>
   <p>rescue Twitter::Error::AlreadyFavorited</p>
@@ -41,4 +41,4 @@ date: 2014-2-03
   <p>end</p>
 </div>
 
-<p>With this code, when a user tries to favorite an app they've already favorited, the Twitter gem's .favorite! method will try to throw an error, but because I have that rescue in there, it'll just redirect back to the user's home feed with the alert that that tweet has already been favorited.</p>
+<p>With this code, when a user tries to favorite an app they've already favorited, the Twitter gem's <span class='code'>.favorite!</span> method will try to throw an error, but because I have that rescue in there, it'll just redirect back to the user's home feed with the alert that that tweet has already been favorited.</p>
