@@ -1,0 +1,44 @@
+date: 2014-2-03
+
+<div class='reverse_links'>
+<h2 class='h2_blog'>Monday, February 3, 2014</h2><br>
+<h1 class='h1_blog'>SOS! SOS!</h1>
+
+<p>Last week I worked on a <a href="http://feed-hunter.herokuapp.com" target="_blank">feed aggregtor app</a> that allows users to follow people's Twitter and Tumblr feeds on one site, as well as RSS feeds. One of the features that I worked on was being able to favorite a tweet from our app and have that show up in the user's favorites on Twitter. This requires using a POST request to send information to Twitter using the application's API. Luckily, the <a href="https://github.com/sferik/twitter" target="_blank">Twitter gem</a> actually makes this feature pretty simple to implement.</p>
+
+<p>I decided to write the logic for favoriting tweets in my posts controller. The first thing I did was to add the following route, which corresponds to a method called "favorite" in my posts controller:</p>
+
+<div class='code'>
+  <p><strong>In routes.rb:</strong></p>
+  <p>post 'favorite' => 'posts#favorite', as: 'favorite'</p>
+</div>
+
+<p>The Twitter gem provides a really slick method that makes it easy for anyone who has logged into our app using their Twitter account to favorite tweets. All you need is a "client" that has the correct credentials to post to Twitter, and a specific tweet that you want favorited. You can create the client using the <span class='code'>Twitter::REST::Client.new</span> method and the access tokens provided by Twitter for that specific user (creating this client is outside of the scope of this blog post).</p>
+
+<p>In our Post database, we stored information about tweets from people that our users are following on Twitter, including the specific "tweet ID" assigned by Twitter. This makes it easy to "grab" that tweet object using the .status method provided by the Twitter gem:
+
+<div class='code'>
+  <p><strong>In posts_controller.rb:</strong></p>
+  <p>tweet = client.status(params[:twitter_id])</p>
+</div>
+
+<p>With our client and tweet in hand, it's easy for that client (the Twitter user signed into our app) to favorite that tweet with the following gem-supplied method:</p>
+
+<div class='code'>
+  <p>client.favorite!(tweet)</p>
+  <p>redirect_to :back, notice: "Tweet has been favorited!"</p>
+</div>
+
+<p>The .favorite method adds the tweet object that is passed in as a argument to that client's favorites on Twitter. Using .favorite! (with the bang), will go further by throwing an error if the client has already favorited that tweet.</p>
+
+<p>This is a convenient feature, but it also means that it's possible to encounter an error page on our app - not very user friendly. We want to handle that error gracefully. And this is where  <span class='code'>rescue</span> comes to the... well, rescue.</p>
+
+<p>"Rescue" can be used whenever you want to work around something that you know might throw an error (i.e. trying to favorite a tweet that has already been favorited). Basically, it tells the app to ignore the error, not freak, and do something else instead. Here's how I used <span class='code'>rescue</span> to work around the error that .favorite! throws:</p>
+
+<div class='code'>
+  <p>rescue Twitter::Error::AlreadyFavorited</p>
+      <p>redirect_to :back, alert: "You already favorited this tweet."</p>
+  <p>end</p>
+</div>
+
+<p>With this code, when a user tries to favorite an app they've already favorited, the Twitter gem's .favorite! method will try to throw an error, but because I have that rescue in there, it'll just redirect back to the user's home feed with the alert that that tweet has already been favorited.</p>
