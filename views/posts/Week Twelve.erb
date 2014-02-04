@@ -4,7 +4,7 @@ date: 2014-2-03
 <h2 class='h2_blog'>Monday, February 3, 2014</h2><br>
 <h1 class='h1_blog'>SOS! SOS!</h1>
 
-<p>Last week I worked on a <a href="http://feed-hunter.herokuapp.com" target="_blank">feed aggregtor app</a> that allows users to follow people's Twitter and Tumblr feeds on one site, as well as RSS feeds. One of the features that I worked on was being able to favorite a tweet from our app and have that show up in the user's favorites on Twitter. This requires using a POST request to send information to Twitter using the application's API. Luckily, the <a href="https://github.com/sferik/twitter" target="_blank">Twitter gem</a> actually makes this feature pretty simple to implement.</p>
+<p>I've been working on a <a href="http://feed-hunter.herokuapp.com" target="_blank">feed aggregator app</a> that allows users to follow Twitter and Tumblr feeds, as well as RSS feeds, all from one site. One of the features that I worked on was being able to favorite a tweet from our app and have that show up in the user's favorites on Twitter. This requires using a POST request to send information to Twitter using the application's API. Luckily, the <a href="https://github.com/sferik/twitter" target="_blank">Twitter gem</a> actually makes this feature pretty simple to implement.</p>
 
 <p>I decided to write the logic for favoriting tweets in my posts controller. The first thing I did was to add the following route, which corresponds to a method called "favorite" in my posts controller:</p>
 
