@@ -175,3 +175,11 @@ ul.dropdown li {
 .indent {
   text-indent:100px;
 }
+
+.indent2 {
+  text-indent:150px;
+}
+
+.indent3 {
+  text-indent:200px;
+}
