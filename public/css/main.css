@@ -173,13 +173,21 @@ ul.dropdown li {
 }
 
 .indent {
-  text-indent:100px;
+  text-indent:50px;
 }
 
 .indent2 {
-  text-indent:150px;
+  text-indent:100px;
 }
 
 .indent3 {
+  text-indent:150px;
+}
+
+.indent4 {
+  text-indent:200px;
+}
+
+.indent5 {
   text-indent:200px;
 }
