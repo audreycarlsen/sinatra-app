@@ -191,3 +191,7 @@ ul.dropdown li {
 .indent5 {
   text-indent:200px;
 }
+
+.normal_list li {
+  list-style-type:circle;
+}
