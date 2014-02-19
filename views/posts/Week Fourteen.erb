@@ -2,9 +2,9 @@ date: 2014-2-18
 
 <div class='reverse_links'>
 <h2 class='h2_blog'>Tuesday, February 18, 2014</h2><br>
-<h1 class='h1_blog'>Dummy Controllers for Dummies</h1>
+<h1 class='h1_blog'>All Hail, Mighty Ajax!</h1>
 
-<p>I've been hearing the term "Ajax" thrown around a lot recently. No, not the mythological Greek hero, Ajax the Great. I'm talking about something even greater: <strong>A</strong>synchronous <strong>J</strong>avascript <strong>A</strong>nd <strong>X</strong>ML. <em>Whoa.</em></p>
+<p>I've been hearing the term "AJAX" thrown around a lot recently. No, not <em>that</em> Ajax, the mythological Greek hero. I'm talking about something even greater: <strong>A</strong>synchronous <strong>J</strong>avascript <strong>A</strong>nd <strong>X</strong>ML. <em>Whoa.</em></p>
 
 <p>In brief, AJAX is used to send data from your browser to a server without sending a new HTTP request (i.e. without refreshing or reloading the web page). Examples of sending data to a server could include creating, updating, or deleting items from an ActiveRecord database. AJAX seems pretty intimidating at first, but it's actually really cool, and once you get the hang of it, it's hard to not want to throw it in everywhere.</p>
 
@@ -34,7 +34,7 @@ date: 2014-2-18
   <p>});</p>
 </div>
 
-<p>I began by adding an event watcher such that <span class="code">.ajax</span> is only called upon when the submit button is clicked. The <span class="code">.ajax</span> method takes a hash of parameters:</p>
+<p>I began by adding an event watcher so that <span class="code">.ajax</span> is only called on when the submit button is clicked. This <span class="code">.ajax</span> method takes a hash of parameters:</p>
 
 <ul>
   <li><span class="code">url</span> specifies the route of the AJAX request (which, in this case, can be pulled from the action attribute of the parent form, as can be seen in the markup)</li>
@@ -51,4 +51,4 @@ date: 2014-2-18
 
 <p>I don't use it here, but there is also a <span class="code">.always</span> method that can be appended to specify anything that should happen regardless of if the request is successful or not.</p>
 
-<p>The final bit of code -- return false --  disables the normal functionality of the button that is being watched. So when a user clicks on the submit button, instead of it redirecting to a different page, like it normally would, the browser instead does what is specified in the AJAX method. However, it's important to keep the basic functionality of the button intact for dinosaurs -- sorry, I mean users -- who do not user JavaScript-compatible browsers.</p>
+<p>The final bit of code -- <span class="code">return false</span> --  disables the normal functionality of the button that is being watched. So when a user clicks on the submit button, instead of it redirecting to a different page, like it normally would, the browser instead does what is specified by the AJAX method. However, it's important to keep the basic functionality of the button intact for dinosaurs -- sorry, I mean users -- who do not have JavaScript-compatible browsers.</p>
