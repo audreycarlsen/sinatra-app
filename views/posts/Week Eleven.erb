@@ -10,23 +10,18 @@ date: 2014-1-26
 
 <p>First, add the gem to your Gemfile:</p>
 
-<div class='code'>
-  <p>gem 'figaro'</p>
-</div>
+<code>gem 'figaro'</code>
 
 <p>Then run <span class="code">bundle</span>. In order to install Figaro, an additional step is necessary:</p>
 
-<div class='code'>
-  <p>rails generate figaro:install</p>
-</div>
+<code>rails generate figaro:install</code>
 
 <p>This will create a file called application.yml in the config folder of your Rails app. This is where you should store anything that you don't want to be seen on GitHub as an environment variable. For example, in my app, I need to store several secret tokens provided by Twitter, so this is what I would put in my YAML file:</p>
 
-<div class='code'>
-  <p>TWITTER_CONSUMER_KEY: "4ZAXXXXXXX"</p>
-  <p>TWITTER_CONSUMER_SECRET: "B2pXXXXXXX"</p>
-  <p>TWITTER_ACCESS_TOKEN: "230XXXXXXX"</p>
-  <p>TWITTER_ACCESS_TOKEN_SECRET: "gmDXXXXXXX"</p>
-</div>
+<pre style="background:#042029;color:#839496"><span style="color:#2aa198"><span style="color:#268bd2;font-weight:700">TWITTER_CONSUMER_KEY:</span> <span style="color:#269186"><span style="color:#c60000">"</span>4ZAXXXXXXX<span style="color:#c60000">"</span></span></span>
+<span style="color:#2aa198"><span style="color:#268bd2;font-weight:700">TWITTER_CONSUMER_SECRET:</span> <span style="color:#269186"><span style="color:#c60000">"</span>B2pXXXXXXX<span style="color:#c60000">"</span></span></span>
+<span style="color:#2aa198"><span style="color:#268bd2;font-weight:700">TWITTER_ACCESS_TOKEN:</span> <span style="color:#269186"><span style="color:#c60000">"</span>230XXXXXXX<span style="color:#c60000">"</span></span></span>
+<span style="color:#2aa198"><span style="color:#268bd2;font-weight:700">TWITTER_ACCESS_TOKEN_SECRET:</span> <span style="color:#269186"><span style="color:#c60000">"</span>gmDXXXXXXX<span style="color:#c60000">"</span></span></span>
+</pre>
 
 <p>And then all you need to do is use these environment variable names in place of the actual keys in the rest of your code. The application.yml file is automatically added to .gitignore, so that file, the only place that contains your actual secret keys, won't ever be pushed to GitHub. The only things that other GitHub users will be able to see are your environment variable placeholders.</p>

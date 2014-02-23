@@ -10,45 +10,49 @@ date: 2014-2-18
 
 <p>Here's an example of some code I wrote today using AJAX. When a user fills out a form with their email address and clicks the submit button, it updates their information in my database with their email address, all without sending a new HTTP request.</p>
 
-<div class='code'>
-  <p>$(function() {</p>
-    <p class='indent'>$("#submit_button").on( "click", function() {</p>
-      <p class='indent2'>$.ajax({</p>
-        <p class='indent3'>url: $(this).parents('form').attr("action"),</p>
-        <p class='indent3'>type: 'PATCH',</p>
-        <p class='indent3'>dataType: 'json',</p>
-        <p class='indent3'>data: {</p>
-          <p class='indent4'>user: {</p>
-            <p class='indent5'>email: $("#user_email").val()</p>
-          <p class='indent4'>}</p>
-        <p class='indent3'>},</p>
-      <p class='indent2'>})</p>
-      <p class='indent2'>.done(function(data){</p>
-        <p class='indent3'>$("#email_form").toggle();</p>
-      <p class='indent2'>})</p>
-      <p class='indent2'>.fail(function(){</p>
-        <p class='indent3'>alert("Something has gone horribly wrong.");</p>
-      <p class='indent2'>});</p>
-      <p class='indent2'>return false;</p>
-    <p class='indent'>});</p>
-  <p>});</p>
-</div>
+<pre style="background:#042029;color:#839496"><span style="color:#859900">$</span><span style="color:#93a1a1">(</span><span style="color:#268bd2">function</span><span style="color:#93a1a1">(</span><span style="color:#93a1a1">)</span> <span style="color:#268bd2">{</span>
+  <span style="color:#859900">$</span><span style="color:#93a1a1">(</span><span style="color:#269186"><span style="color:#c60000">"</span>#submit_button<span style="color:#c60000">"</span></span><span style="color:#93a1a1">)</span>.on<span style="color:#93a1a1">(</span> <span style="color:#269186"><span style="color:#c60000">"</span>click<span style="color:#c60000">"</span></span>, <span style="color:#268bd2">function</span><span style="color:#93a1a1">(</span><span style="color:#93a1a1">)</span> <span style="color:#268bd2">{</span>
 
-<p>I began by adding an event watcher so that <span class="code">.ajax</span> is only called on when the submit button is clicked. This <span class="code">.ajax</span> method takes a hash of parameters:</p>
+    <span style="color:#859900">$</span>.ajax<span style="color:#93a1a1">(</span><span style="color:#268bd2">{</span>
+      url: <span style="color:#859900">$</span><span style="color:#93a1a1">(</span><span style="color:#268bd2">this</span><span style="color:#93a1a1">)</span>.parents<span style="color:#93a1a1">(</span><span style="color:#269186"><span style="color:#c60000">'</span>form<span style="color:#c60000">'</span></span><span style="color:#93a1a1">)</span>.attr<span style="color:#93a1a1">(</span><span style="color:#269186"><span style="color:#c60000">"</span>action<span style="color:#c60000">"</span></span><span style="color:#93a1a1">)</span>,
+      type: <span style="color:#269186"><span style="color:#c60000">'</span>PATCH<span style="color:#c60000">'</span></span>,
+      dataType: <span style="color:#269186"><span style="color:#c60000">'</span>json<span style="color:#c60000">'</span></span>,
+      data: <span style="color:#268bd2">{</span>
+        user: <span style="color:#268bd2">{</span>
+          email: <span style="color:#859900">$</span><span style="color:#93a1a1">(</span><span style="color:#269186"><span style="color:#c60000">"</span>#user_email<span style="color:#c60000">"</span></span><span style="color:#93a1a1">)</span>.val<span style="color:#93a1a1">(</span><span style="color:#93a1a1">)</span>
+        <span style="color:#268bd2">}</span>
+      <span style="color:#268bd2">}</span>,
+      headers: <span style="color:#268bd2">{</span>
+      <span style="color:#269186"><span style="color:#c60000">'</span>X-CSRF-Token<span style="color:#c60000">'</span></span>: <span style="color:#859900">$</span><span style="color:#93a1a1">(</span><span style="color:#269186"><span style="color:#c60000">'</span>meta[name="csrf-token"]<span style="color:#c60000">'</span></span><span style="color:#93a1a1">)</span>.attr<span style="color:#93a1a1">(</span><span style="color:#269186"><span style="color:#c60000">'</span>content<span style="color:#c60000">'</span></span><span style="color:#93a1a1">)</span>
+      <span style="color:#268bd2">}</span>
+    <span style="color:#268bd2">}</span><span style="color:#93a1a1">)</span>
+    .done<span style="color:#93a1a1">(</span><span style="color:#268bd2">function</span><span style="color:#93a1a1">(</span>data<span style="color:#93a1a1">)</span><span style="color:#268bd2">{</span>
+      <span style="color:#859900">$</span><span style="color:#93a1a1">(</span><span style="color:#269186"><span style="color:#c60000">"</span>#email_form<span style="color:#c60000">"</span></span><span style="color:#93a1a1">)</span>.toggle<span style="color:#93a1a1">(</span><span style="color:#93a1a1">)</span>;
+      <span style="color:#859900">$</span><span style="color:#93a1a1">(</span><span style="color:#269186"><span style="color:#c60000">"</span>#email_form_congrats<span style="color:#c60000">"</span></span><span style="color:#93a1a1">)</span>.toggle<span style="color:#93a1a1">(</span><span style="color:#93a1a1">)</span>;
+    <span style="color:#268bd2">}</span><span style="color:#93a1a1">)</span>
+    .fail<span style="color:#93a1a1">(</span><span style="color:#268bd2">function</span><span style="color:#93a1a1">(</span><span style="color:#93a1a1">)</span><span style="color:#268bd2">{</span>
+      <span style="color:#859900">$</span><span style="color:#93a1a1">(</span><span style="color:#269186"><span style="color:#c60000">"</span>#email_form_uhoh<span style="color:#c60000">"</span></span><span style="color:#93a1a1">)</span>.toggle<span style="color:#93a1a1">(</span><span style="color:#93a1a1">)</span>;
+    <span style="color:#268bd2">}</span><span style="color:#93a1a1">)</span>;
+    <span style="color:#859900">return</span> <span style="color:#b58900">false</span>;
+  <span style="color:#268bd2">}</span><span style="color:#93a1a1">)</span>;
+<span style="color:#268bd2">}</span><span style="color:#93a1a1">)</span>;
+</pre>
+
+<p>I began by adding an event watcher so that <code>.ajax</code> is only called on when the submit button is clicked. This <code>.ajax</code> method takes a hash of parameters:</p>
 
 <ul class="normal_list">
-  <li><span class="code">url</span> specifies the route of the AJAX request (which, in this case, can be pulled from the action attribute of the parent form, as can be seen in the markup)</li>
-  <li><span class="code">type</span> specifies the type of HTTP request being made
-  <li><span class="code">dataType</span> specifies the way that the data should be sent to the server (normally, if we weren't using AJAX, this would be HTML, but here it's JSON)</li>
-  <li><span class="code">data</span> is a hash including any data (i.e. things that would normally be accessed through <span class="code">params</span>) that is necessary for the request</li>
+  <li><code>url</code> specifies the route of the AJAX request (which, in this case, can be pulled from the action attribute of the parent form, as can be seen in the markup)</li>
+  <li><code>type</code> specifies the type of HTTP request being made
+  <li><code>dataType</code> specifies the way that the data should be sent to the server (normally, if we weren't using AJAX, this would be HTML, but here it's JSON)</li>
+  <li><code>data</code> is a hash including any data (i.e. things that would normally be accessed through <code>params</code>) that is necessary for the request</li>
 </ul>
 
-<p>Appended to the <span class="code">.ajax</span> method are two other methods, <span class="code">.done</span> and <span class="code">.fail</span>.</p>
+<p>Appended to the <code>.ajax</code> method are two other methods, <code>.done</code> and <code>.fail</code>.</p>
 
-<p>The first method, <span class="code">.done</span>, contains anything that I want to happen if the AJAX request is successful. In this case, I want the email form that was just used to submit an email address to be hidden. JQuery has a really convenient method called <span class="code">.toggle</span> that switches elements back and forth between hidden and visible.</p>
+<p>The first method, <code>.done</code>, contains anything that I want to happen if the AJAX request is successful. In this case, I want the email form that was just used to submit an email address to be hidden. JQuery has a really convenient method called <code>.toggle</code> that switches elements back and forth between hidden and visible.</p>
 
-<p>The second method, <span class="code">.fail</span>, specifies what I want to have happen if the request is not successful. In this case, I want there to be an error message.</p>
+<p>The second method, <code>.fail</code>, specifies what I want to have happen if the request is not successful. In this case, I want there to be an error message.</p>
 
-<p>I don't use it here, but there is also a <span class="code">.always</span> method that can be appended to specify anything that should happen regardless of if the request is successful or not.</p>
+<p>I don't use it here, but there is also a <code>.always</code> method that can be appended to specify anything that should happen regardless of if the request is successful or not.</p>
 
-<p>The final bit of code -- <span class="code">return false</span> --  disables the normal functionality of the button that is being watched. So when a user clicks on the submit button, instead of it redirecting to a different page, like it normally would, the browser instead does what is specified by the AJAX method. However, it's important to keep the basic functionality of the button intact for dinosaurs -- sorry, I mean users -- who do not have JavaScript-compatible browsers.</p>
+<p>The final bit of code -- <code>return false</code> --  disables the normal functionality of the button that is being watched. So when a user clicks on the submit button, instead of it redirecting to a different page, like it normally would, the browser instead does what is specified by the AJAX method. However, it's important to keep the basic functionality of the button intact for dinosaurs -- sorry, I mean users -- who do not have JavaScript-compatible browsers.</p>
