@@ -20,12 +20,12 @@ date: 2014-1-19
 
 <p>...cookies. More specifically, I decided to use a unique ID stored in the user's cookies instead of their IP address as the identifying information. Cookies are still a little bit magical to me, but it turns out they're actually pretty simple to use. You can think of cookies as a hash, just like "params" or "session," that stores information. I set a unique cookie ID for each visitor in the same way that you'd add any other key-value pair into a hash:</p>
 
-<pre style="background:#042029;color:#839496">cookies.permanent[<span style="color:#269186">:visitor_id</span>] <span style="color:#859900">=</span> rand(<span style="color:#269186">1000000000000000000</span>).to_s
+<pre style="background:#fdf6e3;color:#586e75">cookies.permanent[<span style="color:#269186">:visitor_id</span>] <span style="color:#859900">=</span> rand(<span style="color:#269186">1000000000000000000</span>).to_s
 </pre>
 
 <p>So every visitor has a (hopefully) unique number corresponding to "visitor ID" stored in their cookies. More specifically, it's stored in a permanent cookies sub-hash that won't get cleared once the browser is closed. (Note that I turn this number into a string to avoid confusion between FixNum, if the random number is small enough, and BigNum, if the number is large.) Then I stored this number string in a column in my Visitor table called "cookie ID": </p>
 
-<pre style="background:#042029;color:#839496"><span style="color:#a57800">Visitor</span>.create(<span style="color:#269186">cookie_id:</span> cookies.permanent[<span style="color:#269186">:visitor_id</span>])
+<pre style="background:#fdf6e3;color:#586e75"><span style="color:#a57800">Visitor</span>.create(<span style="color:#269186">cookie_id:</span> cookies.permanent[<span style="color:#269186">:visitor_id</span>])
 </pre>
 
 <p>In this way, I can now use this cookie ID that I created to identify each visitor, in lieu of IP address.</p>

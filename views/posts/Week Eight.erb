@@ -16,13 +16,13 @@ date: 2014-1-3
 
 <p>Here's what I included in my User model:</p>
 
-<pre style="background:#042029;color:#839496"><span style="color:#268bd2">has_many</span> <span style="color:#269186">:friendships</span>
+<pre style="background:#fdf6e3;color:#586e75"><span style="color:#268bd2">has_many</span> <span style="color:#269186">:friendships</span>
 <span style="color:#268bd2">has_many</span> <span style="color:#269186">:friends</span>, <span style="color:#269186">:through</span> => <span style="color:#269186">:friendships</span>
 </pre>
 
 <p>And in my Friendship join table:</p>
 
-<pre style="background:#042029;color:#839496"><span style="color:#268bd2">belongs_to</span> <span style="color:#269186">:user</span>
+<pre style="background:#fdf6e3;color:#586e75"><span style="color:#268bd2">belongs_to</span> <span style="color:#269186">:user</span>
 <span style="color:#268bd2">belongs_to</span> <span style="color:#269186">:friend</span>, <span style="color:#269186">:class_name</span> => <span style="color:#269186"><span style="color:#d01f1e">'</span>User<span style="color:#d01f1e">'</span></span>
 </pre>
 

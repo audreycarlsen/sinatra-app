@@ -6,17 +6,16 @@ date: 2014-2-08
 
 <p>Last week, I faced one of my greatest coding fears: RSpec. Somehow, miraculously, I survived, and walked away with an appreciation for <em>why test-driven development might actually be a really good idea</em> (did I really just say that?!). I want to share here a little Rspec nugget that one of our wonderful TA's, <a href="https://twitter.com/drbrain" target="_blank">Eric</a>, taught me. Ladies and gentlemen, I bring you... the dummy controller.</p>
 
-<pre style="background:#042029;color:#839496"><span style="color:#748b00"><span style="color:#748b00">class</span> <span style="color:#a57800">DummyController &lt; ApplicationController</span></span>
+<pre style="background:#fdf6e3;color:#586e75"><span style="color:#748b00"><span style="color:#748b00">class</span> <span style="color:#a57800">DummyController &lt; ApplicationController</span></span>
   <span style="color:#738a05;font-weight:700">def</span> <span style="color:#268bd2">test_current_user</span>
     <span style="color:#268bd2">redirect_to</span> user_path(<span style="color:#268bd2"><span style="color:#268bd2">@</span>current_user</span>)
   <span style="color:#738a05;font-weight:700">end</span>
 <span style="color:#738a05;font-weight:700">end</span>
-
 </pre>
 
 <p>This controller is actually in one of my spec files. Like any normal controller, it inherits from <code>ApplicationController</code>, thus it has all of the functionality described in my application controller, including a <code>current_user</code> method that assigns the currently signed-in user to a "current user" variable (this method is run whenever the application controller is called on, thanks to a <code>before_action</code> linked to <code>current_user</code>). This makes it easier to write logic to make parts of my app only accessible when a user is logged in and exists in my database. The method also includes a <code>rescue</code> (read more about rescues <a href="http://audrey-sinatra.herokuapp.com/blog/Week%20Twelve" target="_blank">here</a>!) that re-sets the session to nil and redirects to the homepage with a flash message if the user currently stored in the session does not exist in the database (i.e. if they were deleted by an admin).</p>
 
-<pre style="background:#042029;color:#839496"><span style="color:#738a05;font-weight:700">def</span> <span style="color:#268bd2">current_user</span>
+<pre style="background:#fdf6e3;color:#586e75"><span style="color:#738a05;font-weight:700">def</span> <span style="color:#268bd2">current_user</span>
   <span style="color:#268bd2"><span style="color:#268bd2">@</span>current_user</span> <span style="color:#859900">||=</span> <span style="color:#a57800">User</span>.find(session[<span style="color:#269186">:user_id</span>]) <span style="color:#738a05;font-weight:700">if</span> session[<span style="color:#269186">:user_id</span>]
 <span style="color:#738a05;font-weight:700">rescue</span> <span style="color:#a57800">ActiveRecord</span>::<span style="color:#a57800">RecordNotFound</span>
   reset_session
@@ -28,7 +27,7 @@ date: 2014-2-08
 
 <p>This is where a dummy controller comes in. It can be used to test methods without linking them to real situations. Since the dummy controller inherits from ApplicationController, if I test a method within the dummy controller (e.g. the aptly-named <code>test_current_user</code> method), it will first run <code>current_user</code>. If <code>current_user</code> is working properly, my specs should pass. Here's an example of a spec I wrote to test if the method does what I want it to do when a user (such as a user with ID of "A" ...that just doesn't make sense) can't be found in the database:
 
-<pre style="background:#042029;color:#839496">describe <span style="color:#a57800">DummyController</span> <span style="color:#859900">do</span>
+<pre style="background:#fdf6e3;color:#586e75">describe <span style="color:#a57800">DummyController</span> <span style="color:#859900">do</span>
   describe <span style="color:#269186"><span style="color:#d01f1e">"</span>current_user<span style="color:#d01f1e">"</span></span> <span style="color:#859900">do</span>
     it <span style="color:#269186"><span style="color:#d01f1e">"</span>handles nonexistent users<span style="color:#d01f1e">"</span></span> <span style="color:#859900">do</span>
       session[<span style="color:#269186">:user_id</span>] <span style="color:#859900">=</span> <span style="color:#269186"><span style="color:#d01f1e">"</span>A<span style="color:#d01f1e">"</span></span>
@@ -41,14 +40,13 @@ date: 2014-2-08
     <span style="color:#738a05;font-weight:700">end</span>
   <span style="color:#738a05;font-weight:700">end</span>
 <span style="color:#738a05;font-weight:700">end</span>
-
 </pre>
 
 <p>Note that it really doesn't matter what I put in the <code>test_current_user</code> method in the dummy controller, since what we're really doing is using it as a way to run the <code>current_user</code> method. It does need to have a redirect though, otherwise Rspec will complain about not being able to find the correct view (since the test_dummer_controller view doesn't exist!).</p>
 
 <p>We will also need to create a new route for this dummy controller. I decided to create this route only in my testing environment using the following code:</p>
 
-<pre style="background:#042029;color:#839496"><span style="color:#738a05;font-weight:700">if</span> <span style="color:#a57800">Rails</span>.env <span style="color:#859900">==</span> <span style="color:#269186"><span style="color:#d01f1e">"</span>test<span style="color:#d01f1e">"</span></span>
+<pre style="background:#fdf6e3;color:#586e75"><span style="color:#738a05;font-weight:700">if</span> <span style="color:#a57800">Rails</span>.env <span style="color:#859900">==</span> <span style="color:#269186"><span style="color:#d01f1e">"</span>test<span style="color:#d01f1e">"</span></span>
   get <span style="color:#269186"><span style="color:#d01f1e">'</span>dummy/test_current_user<span style="color:#d01f1e">'</span></span> => <span style="color:#269186"><span style="color:#d01f1e">'</span>dummy#test_current_user<span style="color:#d01f1e">'</span></span>
 <span style="color:#738a05;font-weight:700">end</span>
 </pre>
