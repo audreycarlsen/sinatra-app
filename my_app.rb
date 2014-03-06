@@ -14,8 +14,8 @@ class MyApp < Sinatra::Base
     erb :index, layout: false
   end
 
-  get '/print' do
-    erb :print
+  get '/digital' do
+    erb :digital
   end
 
   get '/radio' do
