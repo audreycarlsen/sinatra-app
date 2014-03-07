@@ -1,6 +1,6 @@
 body {
   margin: 0;
-  font-family: 'Nunito', sans-serif;
+  font-family: 'Avenir', 'Nunito', sans-serif;
 }
 
 a {
@@ -74,7 +74,7 @@ h3 {
 }
 
 .box {
-  font-family: Avenir;
+  font-family: 'Avenir', 'Nunito';
   margin-left: 185px;
   margin-top: 125px;
   width: 662px;
