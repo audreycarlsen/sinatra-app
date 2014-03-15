@@ -22,6 +22,10 @@ class MyApp < Sinatra::Base
     erb :radio
   end
 
+  get '/blog' do
+    erb :blog
+  end
+
   get '/blog/:post_name' do
     page = erb("/posts/#{params[:post_name]}".to_sym, layout: false)
     page_body = page.split("\n\n", 2).last

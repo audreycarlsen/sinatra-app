@@ -1,0 +1,60 @@
+date: 2014-3-15
+title: Stop Building JSON From Scratch
+
+<div class='reverse_links'>
+<h2 class='h2_blog'>Saturday, March 15, 2014</h2><br>
+<h1 class='h1_blog'>Stop Building JSON From Scratch</h1>
+
+<p>Okay, let's say you want to build an API that returns data in JSON format. There are a couple of different ways to make that dream a reality. In this post, I'm going to talk about one of those ways -- using a Rails gem called <a href="https://github.com/rails/jbuilder" target="_blank">JBuilder</a>.</p>
+
+<p>Before learning about JBuilder, I used to construct customized JSON hashes using the <code>respond_to</code> block built into Rails. Here's a sample of code from one of my previous apps, in the "show" method for my Lists controller. The <code>respond_to</code> block basically tells the controller what to do (i.e. render HTML or JSON) depending on what sort of response is expected.</p>
+
+  <pre style="background:#fdf6e3;color:#586e75">list_hash <span style="color:#859900">=</span> {
+  <span style="color:#269186">id:</span> <span style="color:#268bd2"><span style="color:#268bd2">@</span>list</span>.id,
+  <span style="color:#269186">name:</span> <span style="color:#268bd2"><span style="color:#268bd2">@</span>list</span>.name,
+  <span style="color:#269186">author:</span> <span style="color:#268bd2"><span style="color:#268bd2">@</span>list</span>.user.author,
+  <span style="color:#269186">created_at:</span> <span style="color:#268bd2"><span style="color:#268bd2">@</span>list</span>.created_at
+}
+
+<span style="color:#268bd2">respond_to</span> <span style="color:#859900">do </span>|<span style="color:#268bd2">format</span>|
+  format.html { <span style="color:#268bd2">render</span> <span style="color:#269186">:show</span> }
+  format.json { <span style="color:#268bd2">render</span> <span style="color:#269186">json:</span> list_hash }
+<span style="color:#738a05;font-weight:700">end</span>
+</pre>
+
+<p>Notice that in this code, I am actually constructing the list_hash by hand, and Rails is smart enough to be able to take that hash and turn it into JSON. This is all fine and dandy for a simple hash like list_hash. What if my data is contained in a hugely complicated hash structure? What if I want to use conditional logic and helper methods to build my hash? I definitely don't want to do that all by hand. Nope nope nope. I'd rather use JBuilder.</p>
+
+<p>JBuilder gives us a DSL (domain specific language) that makes rendering complex JSON responses a whole lot easier.</p>
+
+<p>First, you'll have to add the gem to your Gemfile and run <code>bundle</code>. Nothing new here.</p>
+
+<p>Next, create a new file in your <code>/views</code> directory with the extension of <code>.json.jbuilder</code>. This file should have the same name as the controller method it corresponds to, and it should live in the sub-directory that corresponds to that controller as well. (So in the case of the code above, I'd want to name the file <code>show.json.jbuilder</code> and save it in <code>/app/views/lists</code>). This file is where you'll be writing all of the code to generate your JSON response, and Rails will automatically know to look for this file. (There's that old Rails magic again.)</p>
+
+<p>Here's a simple example of how I would construct the same list_hash as above using JBuilder:</p>
+
+<pre style="background:#fdf6e3;color:#586e75">json.id <span style="color:#268bd2"><span style="color:#268bd2">@</span>list</span>.id
+json.name <span style="color:#268bd2"><span style="color:#268bd2">@</span>list</span>.name
+json.author <span style="color:#268bd2"><span style="color:#268bd2">@</span>list</span>.author
+json.created_at <span style="color:#268bd2"><span style="color:#268bd2">@</span>list</span>.created_at
+</pre>
+
+<p>But that's not much shorter than the previous code, is it? I could also write it like this:</p>
+
+<pre style="background:#fdf6e3;color:#586e75">json.extract! <span style="color:#268bd2"><span style="color:#268bd2">@</span>list</span>, <span style="color:#269186">:id</span>, <span style="color:#269186">:name</span>, <span style="color:#269186">:author</span>, <span style="color:#269186">:created_at</span>
+</pre>
+
+<p>Or like this...</p>
+
+<pre style="background:#fdf6e3;color:#586e75">json.(<span style="color:#268bd2"><span style="color:#268bd2">@</span>article</span>, <span style="color:#269186">:id</span>, <span style="color:#269186">:name</span>, <span style="color:#269186">:author</span>, <span style="color:#269186">:created_at</span>)
+</pre>
+
+<p>This makes it a lot easier to build custom JSON hashes. But the real power of JBuilder comes in when you want to start nesting hashes, or incorporating conditional logic or helper methods. For example, if you only want certain information returned if the user is an admin, you could add the following logic:</p>
+
+<pre style="background:#fdf6e3;color:#586e75"><span style="color:#738a05;font-weight:700">if</span> current_user.admin?
+  json.extract! <span style="color:#268bd2"><span style="color:#268bd2">@</span>list</span>, <span style="color:#269186">:id</span>, <span style="color:#269186">:name</span>, <span style="color:#269186">:author</span>, <span style="color:#269186">:created_at</span>
+<span style="color:#738a05;font-weight:700">end</span>
+</pre>
+
+<p>And there you go.</p>
+
+<p>There are a lot of other powerful things that JBuilder can do that I don't have room to cover here in this brief intro. I encourage you to check out the gem's <a href="https://github.com/rails/jbuilder" target="_blank">documentation</a> on GitHub, as well as this <a href="http://railscasts.com/episodes/320-jbuilder?view=asciicast" target="_blank">Railscast</a> if you want to learn more about using conditionals, nesting hashes, etc.</p>
