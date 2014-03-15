@@ -7,18 +7,24 @@ title: Here Comes JBuilder!
 
 <p>Okay, let's say you want to build an API that returns data in JSON format. There are a couple of different ways to make that dream a reality. In this post, I'm going to talk about one of those ways -- using a Rails gem called <a href="https://github.com/rails/jbuilder" target="_blank">JBuilder</a>.</p>
 
-<p>Before learning about JBuilder, I used to construct customized JSON hashes using the <code>respond_to</code> block built into Rails. Here's a sample of code from one of my previous apps, in the "show" method for my Lists controller. The <code>respond_to</code> block basically tells the controller what to do (i.e. render HTML or JSON) depending on what sort of response is expected.</p>
+<p>Before learning about JBuilder, I used to construct customized JSON hashes using the <code>respond_to</code> block built into Rails. Here's a sample of code from one of my previous apps, in the <code>show</code> method for a Lists controller. The <code>respond_to</code> block basically tells the controller what to do (i.e. render HTML or JSON) depending on what sort of response is expected.</p>
 
-  <pre style="background:#fdf6e3;color:#586e75">list_hash <span style="color:#859900">=</span> {
-  <span style="color:#269186">id:</span> <span style="color:#268bd2"><span style="color:#268bd2">@</span>list</span>.id,
-  <span style="color:#269186">name:</span> <span style="color:#268bd2"><span style="color:#268bd2">@</span>list</span>.name,
-  <span style="color:#269186">author:</span> <span style="color:#268bd2"><span style="color:#268bd2">@</span>list</span>.user.author,
-  <span style="color:#269186">created_at:</span> <span style="color:#268bd2"><span style="color:#268bd2">@</span>list</span>.created_at
-}
+<p><strong>In app/controllers/lists_controller.rb:</strong></p>
 
-<span style="color:#268bd2">respond_to</span> <span style="color:#859900">do </span>|<span style="color:#268bd2">format</span>|
-  format.html { <span style="color:#268bd2">render</span> <span style="color:#269186">:show</span> }
-  format.json { <span style="color:#268bd2">render</span> <span style="color:#269186">json:</span> list_hash }
+<pre style="background:#fdf6e3;color:#586e75"><span style="color:#738a05;font-weight:700">def</span> <span style="color:#268bd2">show</span>
+  <span style="color:#268bd2"><span style="color:#268bd2">@</span>list</span> <span style="color:#859900">=</span> <span style="color:#a57800">List</span>.find_by(<span style="color:#269186">id:</span> params[<span style="color:#269186">:id</span>])
+
+  list_hash <span style="color:#859900">=</span> {
+    <span style="color:#269186">id:</span> <span style="color:#268bd2"><span style="color:#268bd2">@</span>list</span>.id,
+    <span style="color:#269186">name:</span> <span style="color:#268bd2"><span style="color:#268bd2">@</span>list</span>.name,
+    <span style="color:#269186">author:</span> <span style="color:#268bd2"><span style="color:#268bd2">@</span>list</span>.user.author,
+    <span style="color:#269186">created_at:</span> <span style="color:#268bd2"><span style="color:#268bd2">@</span>list</span>.created_at
+  }
+
+  <span style="color:#268bd2">respond_to</span> <span style="color:#859900">do </span>|<span style="color:#268bd2">format</span>|
+    format.html { <span style="color:#268bd2">render</span> <span style="color:#269186">:show</span> }
+    format.json { <span style="color:#268bd2">render</span> <span style="color:#269186">json:</span> list_hash }
+  <span style="color:#738a05;font-weight:700">end</span>
 <span style="color:#738a05;font-weight:700">end</span>
 </pre>
 
